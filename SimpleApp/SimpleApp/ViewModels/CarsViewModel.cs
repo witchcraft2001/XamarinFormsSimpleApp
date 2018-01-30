@@ -5,16 +5,24 @@ using System.Text;
 using SimpleApp.Helpers;
 using SimpleApp.Models;
 using SimpleApp.Services;
+using SimpleApp.Views;
 using Xamarin.Forms;
 
 namespace SimpleApp.ViewModels
 {
     public class CarsViewModel: ObservableObjects
-    {        
+    {
+
+        #region Fields
         private IDataService<Car> service;
 
         private ObservableCollection<Car> items;
+        private Car selectedItem;
 
+        private IMainPage view;
+        #endregion
+
+        #region Properties
         public ObservableCollection<Car> Items
         {
             get
@@ -27,15 +35,36 @@ namespace SimpleApp.ViewModels
             }
             set
             {
-                items = value;
-                OnPropertyChanged("Items");
+                SetProperty(ref items, value);
             }
         }
 
-        public CarsViewModel()
+        public Car SelectedItem
         {
+            get { return selectedItem; }
+            set
+            {
+                SetProperty(ref selectedItem, value);
+            }
+        }
+
+        public Command DetailCarCommand { get; set; }
+        #endregion
+
+        public CarsViewModel(IMainPage view)
+        {
+            this.view = view;
             service = DependencyService.Get<IDataService<Car>>();
             items = new ObservableCollection<Car>(service.GetItems());
+            DetailCarCommand = new Command<Car>(c => DoDetailCarCommand(c));
         }
+
+        #region Commands
+        private async void DoDetailCarCommand(Car c)
+        {
+            await view.Navigation.PushAsync(new DetailCarView(c.Id));
+            SelectedItem = null;
+        } 
+        #endregion
     }
 }

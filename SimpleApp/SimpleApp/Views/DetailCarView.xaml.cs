@@ -9,13 +9,13 @@ using Xamarin.Forms.Xaml;
 
 namespace SimpleApp.Views
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MainPage : ContentPage, IMainPage
+	[XamlCompilation(XamlCompilationOptions.Compile)]
+	public partial class DetailCarView : ContentPage
 	{
-		public MainPage()
+		public DetailCarView(int id)
 		{
 			InitializeComponent();
-            BindingContext = new CarsViewModel(this);
+            BindingContext = new DetailCarViewModel(id);
 		}
 	}
 }

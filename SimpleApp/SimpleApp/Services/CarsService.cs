@@ -14,16 +14,15 @@ namespace SimpleApp.Services
 
         public CarsService()
         {
-            items.Add(new Car() { Model = "Kia Rio", Year = 2010, Mileage = 54000, Description = "This is my lovely car!"});
-            items.Add(new Car() { Model = "Kia Pikanto", Year = 2014, Mileage = 66000, Description = "This is my wife's car" });
+            SaveItem(new Car() { Model = "Kia Rio", Year = 2010, Mileage = 54000, Description = "This is my lovely car!"});
+            SaveItem(new Car() { Model = "Kia Pikanto", Year = 2014, Mileage = 66000, Description = "This is my wife's car" });
         }
 
         public Car SaveItem(Car item)
         {
             if (item.Id == 0)
             {
-                var last = items.Max(c => c.Id);
-                item.Id = (last == 0) ? 1 : ++last;
+                item.Id = (items.Count > 0) ? items.Max(c => c.Id) + 1 : 1;
                 items.Add(item);
             } else
             {
