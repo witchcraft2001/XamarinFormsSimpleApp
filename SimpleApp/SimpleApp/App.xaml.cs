@@ -13,7 +13,7 @@ namespace SimpleApp
 		{
 			InitializeComponent();
 
-			MainPage = new SimpleApp.MainPage();
+			MainPage = new NavigationPage(new SimpleApp.Views.MainPage());
 		}
 
 		protected override void OnStart ()

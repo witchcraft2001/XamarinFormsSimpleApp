@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:SimpleApp"
+             xmlns:i="clr-namespace:SimpleApp.Helpers"
+             Title="Hello"
+             x:Class="SimpleApp.Views.MainPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView x:Name="ItemsListView"
+				ItemsSource="{Binding Items}"
+                VerticalOptions="FillAndExpand"
+                HasUnevenRows="true"
+                RefreshCommand="{Binding LoadItemsCommand}"
+                SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                IsPullToRefreshEnabled="true"
+                IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                CachingStrategy="RecycleElement"
+                i:ItemTappedAttached.Command="{Binding DetailCarCommand}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Label Grid.Column="0" Grid.Row="0" Text="{Binding Model}"
+                                   LineBreakMode="NoWrap"
+                                   Style="{DynamicResource ListItemTextStyle}"
+                                   FontSize="16"/>
+                                <Label Grid.Column="0" Grid.Row="1" Text="{Binding Description}"
+                                   LineBreakMode="NoWrap"
+                                   Style="{DynamicResource ListItemDetailTextStyle}"
+                                   FontSize="13"/>
+                                <Button Command="{Binding Path=BindingContext.EditCarCommand, Source={x:Reference Name=ItemsListView}}"
+                                        CommandParameter="{Binding}"
+                                        Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" 
+                                        WidthRequest="48" HeightRequest="48" BackgroundColor="White" 
+                                        BorderColor="Transparent" HorizontalOptions="End">
+                                    <Button.Image>
+                                        <OnPlatform x:TypeArguments="FileImageSource" Android="ic_pencil_grey600_24dp.png"/>
+                                    </Button.Image>
+                                </Button>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
