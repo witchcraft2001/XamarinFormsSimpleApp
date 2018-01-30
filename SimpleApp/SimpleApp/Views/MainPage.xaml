@@ -43,7 +43,7 @@
                                         WidthRequest="48" HeightRequest="48" BackgroundColor="White" 
                                         BorderColor="Transparent" HorizontalOptions="End">
                                     <Button.Image>
-                                        <OnPlatform x:TypeArguments="FileImageSource" Android="ic_pencil_grey600_24dp.png"/>
+                                        <OnPlatform x:TypeArguments="FileImageSource" Android="ic_pencil_grey600_24dp.png" WinPhone="Assets/ic_pencil_grey600_24dp.png"/>
                                     </Button.Image>
                                 </Button>
                             </Grid>
