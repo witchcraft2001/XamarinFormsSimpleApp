@@ -49,6 +49,7 @@ namespace SimpleApp.ViewModels
         }
 
         public Command DetailCarCommand { get; set; }
+        public Command EditCarCommand { get; set; }
         #endregion
 
         public CarsViewModel(IMainPage view)
@@ -57,12 +58,18 @@ namespace SimpleApp.ViewModels
             service = DependencyService.Get<IDataService<Car>>();
             items = new ObservableCollection<Car>(service.GetItems());
             DetailCarCommand = new Command<Car>(c => DoDetailCarCommand(c));
+            EditCarCommand = new Command<Car>(c => DoEditCarCommand(c));
         }
 
         #region Commands
         private async void DoDetailCarCommand(Car c)
         {
             await view.Navigation.PushAsync(new DetailCarView(c.Id));
+            SelectedItem = null;
+        } 
+        private async void DoEditCarCommand(Car c)
+        {
+            await view.Navigation.PushAsync(new EditCarView(c.Id));
             SelectedItem = null;
         } 
         #endregion
