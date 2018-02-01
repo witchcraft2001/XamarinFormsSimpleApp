@@ -5,6 +5,13 @@
              xmlns:i="clr-namespace:SimpleApp.Helpers"
              Title="Hello"
              x:Class="SimpleApp.Views.MainPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Добавить" Command="{Binding AddCarCommand}">
+            <ToolbarItem.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource" Android="ic_plus_white_24dp.png" WinPhone="Assets/ic_plus_grey600_24dp.png"/>
+            </ToolbarItem.Icon>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
             <ListView x:Name="ItemsListView"

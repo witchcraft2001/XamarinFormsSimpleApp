@@ -27,7 +27,14 @@ namespace SimpleApp.ViewModels
         public EditCarViewModel(int id)
         {
             service = DependencyService.Get<IDataService<Car>>() ?? throw new ArgumentNullException("Can't find 'IDataService<Car>'");
-            Model = service.GetItem(id);
+            if (id == 0)
+            {
+                Model = new Car();
+            }
+            else
+            {
+                Model = service.GetItem(id);
+            }
         }
     }
 }
