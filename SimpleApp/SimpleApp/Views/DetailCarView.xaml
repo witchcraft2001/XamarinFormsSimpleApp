@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SimpleApp.Views.DetailCarView">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Margin="10">
             <Label Text="{Binding Model.Model}"/>
             <Label Text="{Binding Model.Year}"/>
             <Label Text="{Binding Model.Mileage}"/>

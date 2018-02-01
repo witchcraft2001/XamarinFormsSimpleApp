@@ -3,10 +3,29 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SimpleApp.Views.EditCarView">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="{Binding Model.Model}"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Grid.Row="0" Text="Модель"/>
+            <Entry Grid.Column="1" Grid.Row="0" Text="{Binding Model.Model}"/>
+            <Label Grid.Column="0" Grid.Row="1" Text="VIN код"/>
+            <Entry Grid.Column="1" Grid.Row="1" Text="{Binding Model.Vin}"/>
+            <Label Grid.Column="0" Grid.Row="2" Text="Год выпуска"/>
+            <Entry Grid.Column="1" Grid.Row="2" Text="{Binding Model.Year}"/>
+            <Label Grid.Column="0" Grid.Row="3" Text="Пробег"/>
+            <Entry Grid.Column="1" Grid.Row="3" Text="{Binding Model.Mileage}"/>
+            <Label Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" Text="Описание"/>
+            <Editor Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" Text="{Binding Model.Description}"/>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
