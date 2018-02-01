@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Text;
+using System.Threading.Tasks;
 using SimpleApp.Helpers;
 using SimpleApp.Models;
 using SimpleApp.Services;
@@ -10,7 +12,7 @@ using Xamarin.Forms;
 
 namespace SimpleApp.ViewModels
 {
-    public class CarsViewModel: ObservableObjects
+    public class CarsViewModel: BaseViewModel
     {
 
         #region Fields
@@ -57,10 +59,38 @@ namespace SimpleApp.ViewModels
         {
             this.view = view;
             service = DependencyService.Get<IDataService<Car>>();
-            items = new ObservableCollection<Car>(service.GetItems());
             DetailCarCommand = new Command<Car>(c => DoDetailCarCommand(c));
             AddCarCommand = new Command(DoAddCarCommand);
             EditCarCommand = new Command<Car>(c => DoEditCarCommand(c));
+            ExecuteLoadCarsCommand();
+
+            MessagingCenter.Subscribe<EditCarViewModel, Car>(this, "EditCar", async (obj, item) =>
+            {
+                await ExecuteLoadCarsCommand();
+            });
+        }
+
+        private async Task ExecuteLoadCarsCommand()
+        {
+            if (IsBusy)
+            {
+                return;
+            }
+
+            IsBusy = true;
+
+            try
+            {
+                Items = await Task.Run(() => new ObservableCollection<Car>(service.GetItems()));
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+            finally
+            {
+                IsBusy = false;
+            }
         }
 
         #region Commands

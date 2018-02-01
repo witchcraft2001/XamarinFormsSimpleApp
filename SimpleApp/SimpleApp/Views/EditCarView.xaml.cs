@@ -11,12 +11,17 @@ using Xamarin.Forms.Xaml;
 namespace SimpleApp.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class EditCarView : ContentPage
+	public partial class EditCarView : ContentPage, IEditCarView
 	{
 		public EditCarView (int id)
 		{
 			InitializeComponent ();
-            BindingContext = new EditCarViewModel(id);
+            BindingContext = new EditCarViewModel(this, id);
         }
-	}
+
+        public async void CloseView()
+        {
+            await Navigation.PopToRootAsync();
+        }
+    }
 }

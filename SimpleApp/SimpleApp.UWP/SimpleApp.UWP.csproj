@@ -104,6 +104,7 @@
     <None Include="SimpleApp.UWP_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\ic_content_save_grey600_24dp.png" />
     <Content Include="Assets\ic_delete_grey600_24dp.png" />
     <Content Include="Assets\ic_pencil_grey600_24dp.png" />
     <Content Include="Assets\ic_plus_grey600_24dp.png" />
